@@ -1,103 +1,107 @@
 <mvc:View
-	controllerName="zjblessons.Worklist.controller.Worklist"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+    controllerName="zjblessons.Worklist.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+>
+    <semantic:SemanticPage
+        id="page"
+        headerPinnable="false"
+        toggleHeaderOnTitleClick="false"
+    >
+        <semantic:titleHeading>
+            <Title text="{i18n>worklistTitle}" />
+        </semantic:titleHeading>
 
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
-
-		<semantic:titleHeading>
-			<Title text="{i18n>worklistTitle}" />
-		</semantic:titleHeading>
-
-		<semantic:content>
-			<Table
-				id="table"
-				width="auto"
-				items="{
+        <semantic:content>
+            <Table
+                id="table"
+                width="auto"
+                items="{
 					path: '/zjblessons_base_Headers',
 					sorter: {
 						path: 'DocumentDate',
 						descending: true
 					}
 				}"
-				noDataText="{worklistView>/tableNoDataText}"
-				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-				growing="true"
-				growingScrollToLoad="true"
-				updateFinished="onUpdateFinished">
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                updateFinished="onUpdateFinished"
+            >
+                <headerToolbar>
+                    <Toolbar>
+                        <Title
+                            id="tableHeader"
+                            text="{worklistView>/worklistTableTitle}"
+                        />
+                        <ToolbarSpacer />
+                        <SearchField
+                            id="searchField"
+                            showSearchButton="false"
+                            tooltip="{i18n>worklistSearchTooltip}"
+                            liveChange="onChange"
+                            width="auto"
+                        />
+                    </Toolbar>
+                </headerToolbar>
 
-				<headerToolbar>
-					<Toolbar>
-						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
-						<ToolbarSpacer />
-						<SearchField
-							id="searchField"
-							tooltip="{i18n>worklistSearchTooltip}"
-							search="onSearch"
-							width="auto">
-						</SearchField>
-					</Toolbar>
-				</headerToolbar>
+                <columns>
+                    <Column id="documentNumber">
+                        <Text text="{i18n>tableDocumentNumberTitle}" />
+                    </Column>
+                    <Column id="documentDate">
+                        <Text text="{i18n>tableDocumentDateTitle}" />
+                    </Column>
+                    <Column id="plantText">
+                        <Text text="{i18n>tablePlantTextTitle}" />
+                    </Column>
+                    <Column id="description">
+                        <Text text="{i18n>tableDescriptionTitle}" />
+                    </Column>
+                    <Column id="created">
+                        <Text text="{i18n>tableCreatedTitle}" />
+                    </Column>
+                </columns>
 
-				<columns>
-					<Column id="documentNumber">
-						<Text text="{i18n>tableDocumentNumberTitle}"/>
-					</Column>
-					<Column id="documentDate">
-						<Text text="{i18n>tableDocumentDateTitle}"/>
-					</Column>
-					<Column id="plantText">
-						<Text text="{i18n>tablePlantTextTitle}"/>
-					</Column>
-					<Column id="description">
-						<Text text="{i18n>tableDescriptionTitle}"/>
-					</Column>
-					<Column id="created">
-						<Text text="{i18n>tableCreatedTitle}"/>
-					</Column>
-				</columns>
-
-				<items>
-					<ColumnListItem
-						type="Navigation"
-						press="onPress">
-						<cells>
-							<ObjectIdentifier
-								title="{DocumentNumber}"/>
-							<ObjectIdentifier
-								title="{
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press="onPress"
+                    >
+                        <cells>
+                            <ObjectIdentifier title="{DocumentNumber}" />
+                            <ObjectIdentifier
+                                title="{
 									path: 'DocumentDate',
 									type: 'sap.ui.model.type.Date',
 									formatOptions: {
 										style: 'short'
-									}}"/>
-							<ObjectIdentifier
-								title="{PlantText}"/>
-							<ObjectIdentifier
-								title="{Description}"/> 
-							<ObjectIdentifier
-								title="{
+									}}"
+                            />
+                            <ObjectIdentifier title="{PlantText}" />
+                            <ObjectIdentifier title="{Description}" />
+                            <ObjectIdentifier
+                                title="{
 									path: 'Created',
 									type: 'sap.ui.model.type.Date',
 									formatOptions: {
 										pattern: 'HH:mm dd/MM/yyyy'
 									}
-								}"/> 
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-		</semantic:content>
+								}"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </semantic:content>
 
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-
-	</semantic:SemanticPage>
-
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction
+                id="shareEmail"
+                press="onShareEmailPress"
+            />
+        </semantic:sendEmailAction>
+    </semantic:SemanticPage>
 </mvc:View>
