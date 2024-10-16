@@ -16,14 +16,21 @@ sap.ui.define([
 			this.setModel(oViewModel, "worklistView");
 		},
 
-		onChange: function (oEvent) {
+		onLiveChangeDNumberSField: function (oEvent) {
 			const sValue = oEvent.getParameter('newValue');
-			this._searchHandler(sValue);
+
+			this._searchHandler('DocumentNumber', FilterOperator.Contains, sValue);
 		},
 
-		_searchHandler: function (sValue) {
+		searchPTextSField: function (oEvent) {
+			const sValue = oEvent.getParameter('query');
+
+			this._searchHandler('PlantText', FilterOperator.EQ, sValue);
+		},
+
+		_searchHandler: function (sPath, vOperator, sValue) {
 			const oTable = this.getView().byId('table'),
-				oFilter = new Filter('DocumentNumber', FilterOperator.Contains, sValue);
+				oFilter = !!sValue.length ? new Filter(sPath, vOperator, sValue) : [];
 
 			oTable.getBinding('items').filter(oFilter);
 		}

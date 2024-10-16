@@ -31,19 +31,27 @@
                 updateFinished="onUpdateFinished"
             >
                 <headerToolbar>
-                    <Toolbar>
+                    <Toolbar height='100%'>
                         <Title
                             id="tableHeader"
                             text="{worklistView>/worklistTableTitle}"
                         />
                         <ToolbarSpacer />
-                        <SearchField
-                            id="searchField"
-                            showSearchButton="false"
-                            tooltip="{i18n>worklistSearchTooltip}"
-                            liveChange="onChange"
-                            width="auto"
-                        />
+                        <VBox>
+                            <SearchField
+                                id="DNumberSField"
+                                showSearchButton="false"
+                                tooltip="{i18n>worklistSearchTooltip}"
+                                liveChange="onLiveChangeDNumberSField"
+                                width="auto"
+                            />
+                            <SearchField
+                                id="PTextSField"
+                                tooltip="{i18n>worklistSearchTooltip}"
+                                search="searchPTextSField"
+                                width="auto"
+                            />
+                        </VBox>
                     </Toolbar>
                 </headerToolbar>
 
@@ -66,10 +74,7 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem
-                        type="Navigation"
-                        press="onPress"
-                    >
+                    <ColumnListItem type="Navigation">
                         <cells>
                             <ObjectIdentifier title="{DocumentNumber}" />
                             <ObjectIdentifier
@@ -96,12 +101,5 @@
                 </items>
             </Table>
         </semantic:content>
-
-        <semantic:sendEmailAction>
-            <semantic:SendEmailAction
-                id="shareEmail"
-                press="onShareEmailPress"
-            />
-        </semantic:sendEmailAction>
     </semantic:SemanticPage>
 </mvc:View>
