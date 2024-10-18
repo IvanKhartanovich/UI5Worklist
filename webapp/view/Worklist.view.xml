@@ -2,18 +2,12 @@
     controllerName="zjblessons.Worklist.controller.Worklist"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:semantic="sap.f.semantic"
 >
-    <semantic:SemanticPage
+    <Page
         id="page"
-        headerPinnable="false"
-        toggleHeaderOnTitleClick="false"
+        title="{i18n>worklistTitle}"
     >
-        <semantic:titleHeading>
-            <Title text="{i18n>worklistTitle}" />
-        </semantic:titleHeading>
-
-        <semantic:content>
+        <content>
             <Table
                 id="table"
                 width="auto"
@@ -32,23 +26,23 @@
                 updateFinished="onUpdateFinished"
             >
                 <headerToolbar>
-                    <Toolbar height='100%'>
+                    <Toolbar height='auto'>
                         <Title
                             id="tableHeader"
-                            text="{worklistView>/worklistTableTitle}"
+                            text="{i18n>worklistTableTitle}"
                         />
                         <ToolbarSpacer />
                         <VBox>
                             <SearchField
                                 id="DNumberSField"
                                 showSearchButton="false"
-                                tooltip="{i18n>worklistSearchTooltip}"
+                                tooltip="{i18n>worklistSearchTooltipDNumber}"
                                 liveChange="onLiveChangeDNumberSField"
                                 width="auto"
                             />
                             <SearchField
                                 id="PTextSField"
-                                tooltip="{i18n>worklistSearchTooltip}"
+                                tooltip="{i18n>worklistSearchTooltipPText}"
                                 search="searchPTextSField"
                                 width="auto"
                             />
@@ -101,6 +95,6 @@
                     </ColumnListItem>
                 </items>
             </Table>
-        </semantic:content>
-    </semantic:SemanticPage>
+        </content>
+    </Page>
 </mvc:View>
