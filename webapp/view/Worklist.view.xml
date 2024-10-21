@@ -40,6 +40,11 @@
                                 width="auto"
                             />
                         </VBox>
+                        <Button
+                            icon="{i18n>refreshIcon}"
+                            type="Transparent"
+                            press="onPressRefresh"
+                        />
                     </Toolbar>
                 </headerToolbar>
 

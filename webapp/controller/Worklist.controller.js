@@ -93,6 +93,10 @@ sap.ui.define([
 			this.getModel().remove(skey);
 		},
 
+		onPressRefresh: function (oEvent) {
+			this._bindTable()
+		},
+
 		searchPTextSField: function (oEvent) {
 			const sValue = oEvent.getParameter('query');
 
