@@ -4,8 +4,8 @@
 >
     <Dialog
         class='sapUiContentPadding'
-        title="{i18n>createDialogTitle}"
-        beforeOpen='onDialogBeforeOpen'
+        beforeOpen="onDialogBeforeOpen"
+        title='{i18n>createDialogTitle}'
     >
         <content>
             <VBox>
@@ -47,28 +47,6 @@
                     <Input
                         id='idRegionText'
                         value="{RegionText}"
-                    />
-                </VBox>
-                <VBox>
-                    <Label
-                        text='Version'
-                        labelFor="idVersion"
-                    />
-                    <Input
-                        enabled="false"
-                        id='idVersion'
-                        value="{Version}"
-                    />
-                </VBox>
-                <VBox>
-                    <Label
-                        text='Instance'
-                        labelFor="idInstance"
-                    />
-                    <Input
-                        enabled="false"
-                        id='idInstance'
-                        value="{Instance}"
                     />
                 </VBox>
                 <VBox>

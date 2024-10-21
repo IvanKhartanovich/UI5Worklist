@@ -121,12 +121,10 @@ sap.ui.define([
 		},
 
 		_loadCreateDialog: async function () {
-			this._oDialog = await Fragment.load({
-				name: 'zjblessons.Worklist.view.fragment.CreateDialog',
+			this._oDialog = await this.loadFragment({
+				name: "zjblessons.Worklist.view.fragment.CreateDialog",
 				controller: this,
-				id: 'Dialog'
 			}).then(oDialog => {
-				this.getView().addDependent(oDialog);
 				return oDialog;
 			});
 			this._oDialog.open();
@@ -140,7 +138,7 @@ sap.ui.define([
 				},
 				oEntry = this.getModel().createEntry('/zjblessons_base_Headers', { properties: oParams });
 
-			oDialog.setBindingContext();
+			oDialog.setBindingContext(oEntry);
 		},
 
 		onCancelButtonPress: function () {
@@ -151,7 +149,7 @@ sap.ui.define([
 		onSaveButtonPress: function (oEvent) {
 			this.getModel().submitChanges({
 				success: () => {
-					MessageToast.show(this.getResourceBundle().getText('created'));
+					MessageToast.show(this.getResourceBundle().getText('toastCreated'));
 					this._bindTable();
 				}
 			});
