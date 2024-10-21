@@ -11,13 +11,6 @@
             <Table
                 id="table"
                 width="auto"
-                items="{
-					path: '/zjblessons_base_Headers',
-					sorter: {
-						path: 'DocumentDate',
-						descending: true
-					}
-				}"
                 noDataText="{worklistView>/tableNoDataText}"
                 busyIndicatorDelay="{worklistView>/tableBusyDelay}"
                 growing="true"
@@ -67,33 +60,6 @@
                         <Text text="{i18n>tableCreatedTitle}" />
                     </Column>
                 </columns>
-
-                <items>
-                    <ColumnListItem type="Navigation">
-                        <cells>
-                            <ObjectIdentifier title="{DocumentNumber}" />
-                            <ObjectIdentifier
-                                title="{
-									path: 'DocumentDate',
-									type: 'sap.ui.model.type.Date',
-									formatOptions: {
-										style: 'short'
-									}}"
-                            />
-                            <ObjectIdentifier title="{PlantText}" />
-                            <ObjectIdentifier title="{Description}" />
-                            <ObjectIdentifier
-                                title="{
-									path: 'Created',
-									type: 'sap.ui.model.type.Date',
-									formatOptions: {
-										pattern: 'HH:mm dd/MM/yyyy'
-									}
-								}"
-                            />
-                        </cells>
-                    </ColumnListItem>
-                </items>
             </Table>
         </content>
     </Page>
