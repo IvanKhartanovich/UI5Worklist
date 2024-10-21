@@ -5,7 +5,7 @@
 >
     <Page
         id="page"
-        title="{i18n>worklistTitle}"
+        showHeader="false"
     >
         <content>
             <Table
@@ -22,7 +22,7 @@
                     <Toolbar height='auto'>
                         <Title
                             id="tableHeader"
-                            text="{i18n>worklistTableTitle}"
+                            text="{i18n>worklistTableTitle} ({= ${worklistView>/sCount}})"
                         />
                         <ToolbarSpacer />
                         <VBox>
