@@ -5,14 +5,18 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/FilterOperator",
-	"sap/m/Text"
+	"sap/m/Text",
+	"sap/ui/core/Fragment",
+	"sap/m/MessageToast"
 ], function (BaseController,
 	JSONModel,
 	formatter,
 	Filter,
 	Sorter,
 	FilterOperator,
-	Text) {
+	Text,
+	Fragment,
+	MessageToast) {
 	"use strict";
 
 	return BaseController.extend("zjblessons.Worklist.controller.Worklist", {
@@ -72,6 +76,8 @@ sap.ui.define([
 					}), new sap.m.Text({
 						text: '{PlantText}'
 					}), new sap.m.Text({
+						text: '{RegionText}'
+					}), new sap.m.Text({
 						text: '{Description}'
 					}), new sap.m.Text({
 						text: '{Created}'
@@ -93,8 +99,12 @@ sap.ui.define([
 			this.getModel().remove(skey);
 		},
 
-		onPressRefresh: function (oEvent) {
+		onPressRefresh: function () {
 			this._bindTable()
+		},
+
+		onPressAdd: function () {
+			this._loadCreateDialog();
 		},
 
 		searchPTextSField: function (oEvent) {
@@ -108,6 +118,44 @@ sap.ui.define([
 				oFilter = !!sValue.length ? new Filter(sPath, vOperator, sValue) : [];
 
 			oTable.getBinding('items').filter(oFilter);
+		},
+
+		_loadCreateDialog: async function () {
+			this._oDialog = await Fragment.load({
+				name: 'zjblessons.Worklist.view.fragment.CreateDialog',
+				controller: this,
+				id: 'Dialog'
+			}).then(oDialog => {
+				this.getView().addDependent(oDialog);
+				return oDialog;
+			});
+			this._oDialog.open();
+		},
+
+		onDialogBeforeOpen: function (oEvent) {
+			const oDialog = oEvent.getSource(),
+				oParams = {
+					Version: 'A',
+					Instance: 1000000,
+				},
+				oEntry = this.getModel().createEntry('/zjblessons_base_Headers', { properties: oParams });
+
+			oDialog.setBindingContext();
+		},
+
+		onCancelButtonPress: function () {
+			this.getModel().resetChanges();
+			this._oDialog.close();
+		},
+
+		onSaveButtonPress: function (oEvent) {
+			this.getModel().submitChanges({
+				success: () => {
+					MessageToast.show(this.getResourceBundle().getText('created'));
+					this._bindTable();
+				}
+			});
+			this._oDialog.close();
 		}
 
 	});

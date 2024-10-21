@@ -41,6 +41,11 @@
                             />
                         </VBox>
                         <Button
+                            icon="{i18n>addIcon}"
+                            type="Emphasized"
+                            press="onPressAdd"
+                        />
+                        <Button
                             icon="{i18n>refreshIcon}"
                             type="Transparent"
                             press="onPressRefresh"
@@ -57,6 +62,9 @@
                     </Column>
                     <Column id="plantText">
                         <Text text="{i18n>tablePlantTextTitle}" />
+                    </Column>
+                    <Column id="regionText">
+                        <Text text="{i18n>tableRegionTextTitle}" />
                     </Column>
                     <Column id="description">
                         <Text text="{i18n>tableDescriptionTitle}" />
