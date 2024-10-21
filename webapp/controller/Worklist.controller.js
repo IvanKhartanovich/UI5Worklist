@@ -75,10 +75,22 @@ sap.ui.define([
 						text: '{Description}'
 					}), new sap.m.Text({
 						text: '{Created}'
-					}),
+					}), new sap.m.Button({
+						type: 'Transparent',
+						icon: this.getResourceBundle().getText('declineIcon'),
+						press: this._onPressDelete.bind(this),
+					})
 				]
 			});
 			return oTemplate;
+		},
+
+		_onPressDelete: function (oEvent) {
+			const oBindingContext = oEvent.getSource().getBindingContext(),
+				skey = this.getModel().createKey('/zjblessons_base_Headers', {
+					HeaderID: oBindingContext.getProperty('HeaderID')
+				});
+			this.getModel().remove(skey);
 		},
 
 		searchPTextSField: function (oEvent) {
