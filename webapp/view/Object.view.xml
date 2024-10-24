@@ -3,6 +3,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
 >
     <Page
         id="page"
@@ -102,7 +103,6 @@
                                             </VBox>
                                         </content>
                                     </CustomListItem>
-
                                     <CustomListItem>
                                         <content>
                                             <Label
@@ -124,7 +124,96 @@
                         icon="{i18n>allIcon}"
                         text="{i18n>objectForm}"
                         key="Form"
-                    />
+                    >
+                        <VBox class="sapUiSmallMargin">
+                            <form:Form>
+                                <form:title>
+                                    <core:Title text="{DocumentNumber}" />
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="3"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="4"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="2"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                    />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="Main">
+                                        <form:formElements>
+                                            <form:FormElement
+                                                label="{i18n>formHeaderID}"
+                                            >
+                                                <Text text="{HeaderID}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>formVersion}"
+                                            >
+                                                <Text text="{Version}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>tableDocumentDateTitle}"
+                                            >
+                                                <Text text="{DocumentDate}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>tablePlantTextTitle}"
+                                            >
+                                                <Text text="{PlantText}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>tableRegionTextTitle}"
+                                            >
+                                                <Text text="{RegionText}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>tableDescriptionTitle}"
+                                            >
+                                                <Text text="{Description}" />
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer title="Details">
+                                        <form:formElements>
+                                            <form:FormElement
+                                                label="{i18n>tableCreatedTitle}"
+                                            >
+                                                <Text text="{Created}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>formCreatedByFullNameTitle}"
+                                            >
+                                                <Text
+                                                    text="{CreatedByFullName}"
+                                                />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>formModifiedTitle}"
+                                            >
+                                                <Text text="{Modified}" />
+                                            </form:FormElement>
+                                            <form:FormElement
+                                                label="{i18n>formModifiedByFullNameTitle}"
+                                            >
+                                                <Text
+                                                    text="{ModifiedByFullName}"
+                                                />
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                        </VBox>
+                    </IconTabFilter>
                 </items>
             </IconTabBar>
         </content>
