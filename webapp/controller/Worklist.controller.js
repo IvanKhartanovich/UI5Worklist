@@ -79,14 +79,27 @@ sap.ui.define([
 						text: '{Description}'
 					}), new sap.m.Text({
 						text: '{Created}'
+					}), new sap.m.Switch({
+						customTextOn: 'D',
+						customTextOff: 'A',
+						state: "{= ${Version} === 'D'}",
+						change: this._changeVersion.bind(this),
 					}), new sap.m.Button({
 						type: 'Transparent',
 						icon: this.getResourceBundle().getText('declineIcon'),
 						press: this._onPressDelete.bind(this),
-					})
+					}),
 				]
 			});
 			return oTemplate;
+		},
+
+		_changeVersion: function (oEvent) {
+			const sVersion = oEvent.getParameter('state') === true ? 'D' : 'A',
+				sPath = oEvent.getSource().getBindingContext().getPath();
+			this.getModel().setProperty(sPath + '/Version', sVersion);
+
+			this.getModel().submitChanges({});
 		},
 
 		_onPressDelete: function (oEvent) {
@@ -160,6 +173,7 @@ sap.ui.define([
 				success: () => {
 					MessageToast.show(this.getResourceBundle().getText('toastCreated'));
 					this._bindTable();
+					this.bind
 				}
 			});
 			this._oDialog.close();

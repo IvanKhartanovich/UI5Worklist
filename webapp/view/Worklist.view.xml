@@ -91,7 +91,10 @@
                     <Column id="created">
                         <Text text="{i18n>tableCreatedTitle}" />
                     </Column>
-                    <Column width="2%">
+                    <Column width="5%">
+                        <Text text="" />
+                    </Column>
+                    <Column width="3%">
                         <Text text="" />
                     </Column>
                 </columns>
