@@ -2,12 +2,14 @@ sap.ui.define([
 	"zjblessons/Worklist/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"zjblessons/Worklist/model/formatter"
+	"zjblessons/Worklist/model/formatter",
+	"sap/m/MessageToast"
 ], function (
 	BaseController,
 	JSONModel,
 	History,
-	formatter
+	formatter,
+	MessageToast
 ) {
 	"use strict";
 
@@ -19,7 +21,9 @@ sap.ui.define([
 			var iOriginalBusyDelay,
 				oViewModel = new JSONModel({
 					busy: true,
-					delay: 0
+					delay: 0,
+					bEditMode: false,
+					sSelectedTab: 'List'
 				});
 
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
@@ -27,8 +31,7 @@ sap.ui.define([
 			this.setModel(oViewModel, "objectView");
 			this.getOwnerComponent().getModel().metadataLoaded().then(function () {
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
-			}
-			);
+			});
 		},
 
 		onNavBack: function () {
@@ -89,7 +92,48 @@ sap.ui.define([
 		},
 		onIconTabBarSelect: function () {
 			//TODO implement onIconTabBarSelect 
-		}
+		},
+
+		onCancelButtonPress: function () {
+			this.getModel().resetChanges();
+			this._setEditMode(false);
+		},
+
+		onSaveButtonPress: function (oEvent) {
+			this._setEditMode(false);
+			this.getModel().submitChanges({
+				success: () => {
+					MessageToast.show(this.getResourceBundle().getText('toastCreated'));
+					// this._bindView();
+					this.bind
+				}
+			});
+		},
+		onEditButtonPress: function () {
+			this._setEditMode(true);
+
+		},
+
+		_setEditMode(bEditMode) {
+			const oModel = this.getModel('objectView');
+
+			oModel.setProperty('/bEditMode', bEditMode);
+		},
+
+		onDeleteButtonPress: function (oEvent) {
+
+			const oBindingContext = oEvent.getSource().getBindingContext(),
+				skey = this.getModel().createKey('/zjblessons_base_Headers', {
+					HeaderID: oBindingContext.getProperty('HeaderID')
+				}), sVersion = oBindingContext.getProperty('Version');
+			if (sVersion === 'D') {
+				this.getModel().remove(skey);
+				this.onNavBack();
+			}
+			else {
+				MessageToast.show(this.getResourceBundle().getText('deleteNotAllowed'));
+			}
+		},
 	});
 }
 );

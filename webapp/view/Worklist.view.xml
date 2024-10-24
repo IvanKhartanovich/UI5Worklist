@@ -26,6 +26,7 @@
                                 text="{i18n>worklistTableTitle} ({= ${worklistView>/sCount}})"
                             />
                             <IconTabHeader
+                                selectedKey="{= ${worklistView>/sSelectedTab}}"
                                 backgroundDesign="Transparent"
                                 mode="Inline"
                                 class="sapUiResponsiveContentPadding"
@@ -35,6 +36,7 @@
                                     <IconTabFilter
                                         icon="{i18n>allIcon}"
                                         text="{i18n>filterAll}"
+                                        key="All"
                                     />
                                     <IconTabFilter
                                         icon="{i18n>deactivatedIcon}"

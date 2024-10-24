@@ -5,16 +5,54 @@
 >
     <Page
         id="page"
-        showHeader="false"
         busy="{objectView>/busy}"
         busyIndicatorDelay="{objectView>/delay}"
     >
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button
+                        type="Transparent"
+                        icon="{i18n>backIcon}"
+                        press="onNavBack"
+                    />
+                    <Title text="{DocumentNumber}" />
+                </contentLeft>
+                <contentRight>
+                    <Button
+                        icon="{i18n>editIcon}"
+                        text="{i18n>objectEdit}"
+                        visible="{= !${objectView>/bEditMode}}"
+                        press="onEditButtonPress"
+                    />
+                    <Button
+                        type="Emphasized"
+                        text="{i18n>save}"
+                        visible="{= ${objectView>/bEditMode}}"
+                        press="onSaveButtonPress"
+                    />
+                    <Button
+                        text="{i18n>cancel}"
+                        visible="{= ${objectView>/bEditMode}}"
+                        press="onCancelButtonPress"
+                    />
+                    <Button
+                        text="{i18n>objectDelete}"
+                        icon="{i18n>deleteIcon}"
+                        visible="{= !${objectView>/bEditMode}}"
+                        press="onDeleteButtonPress"
+                    />
+                </contentRight>
+            </Bar>
+        </customHeader>
         <content>
             <IconTabBar
                 backgroundDesign="Transparent"
                 headerMode="Inline"
                 class="sapUiResponsiveContentPadding"
                 select="onIconTabBarSelect"
+                selectedKey="{= ${objectView>/sSelectedTab}}"
+                expandable="false"
             >
                 <content />
                 <items>

@@ -23,7 +23,8 @@ sap.ui.define([
 
 		onInit: function () {
 			var oViewModel = new JSONModel({
-				sCount: '0'
+				sCount: '0',
+				sSelectedTab: 'All'
 			});
 			this.setModel(oViewModel, "worklistView");
 		},
