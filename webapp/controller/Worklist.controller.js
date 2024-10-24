@@ -64,6 +64,7 @@ sap.ui.define([
 
 		_getTableTemplate: function () {
 			const oTemplate = new sap.m.ColumnListItem({
+				press: this._onItemSelect.bind(this),
 				highlight: "{= ${Version} === 'A' ? 'Success' : 'Error'}",
 				type: 'Navigation',
 				navigated: true,
@@ -192,7 +193,12 @@ sap.ui.define([
 			}
 
 			oBinding.filter(oFilter);
-		}
+		},
+
+		_onItemSelect: function (oEvent) {
+			const sHeaderID = oEvent.getSource().getBindingContext().getProperty('HeaderID');
+			this.getRouter().navTo('object', { objectId: sHeaderID });
+		},
+
 	});
-}
-);
+});
