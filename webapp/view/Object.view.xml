@@ -2,6 +2,7 @@
     controllerName="zjblessons.Worklist.controller.Object"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
 >
     <Page
         id="page"
@@ -16,7 +17,9 @@
                         icon="{i18n>backIcon}"
                         press="onNavBack"
                     />
-                    <Title text="{DocumentNumber}" />
+                    <Title
+                        text="{= ${objectView>/bEditMode}? ${i18n>objectEditMode} : ${DocumentNumber}}"
+                    />
                 </contentLeft>
                 <contentRight>
                     <Button
@@ -49,7 +52,7 @@
             <IconTabBar
                 backgroundDesign="Transparent"
                 headerMode="Inline"
-                class="sapUiResponsiveContentPadding"
+                class="sapUiContentPadding"
                 select="onIconTabBarSelect"
                 selectedKey="{= ${objectView>/sSelectedTab}}"
                 expandable="false"
@@ -60,7 +63,63 @@
                         icon="{i18n>listIcon}"
                         text="{i18n>objectList}"
                         key="List"
-                    />
+                    >
+                        <VBox>
+                            <List>
+                                <items>
+                                    <CustomListItem>
+                                        <content>
+                                            <Label
+                                                labelFor="idDocumentNumberInput"
+                                                text="{i18n>tableDocumentNumberTitle}"
+                                            />
+                                            <Input
+                                                id="idDocumentNumberInput"
+                                                value="{DocumentNumber}"
+                                                editable="{= ${objectView>/bEditMode}}"
+                                            />
+                                        </content>
+                                    </CustomListItem>
+                                    <CustomListItem>
+                                        <content>
+                                            <VBox>
+                                                <Label
+                                                    labelFor="idRegionTextSelect"
+                                                    text="{i18n>tableRegionTextTitle}"
+                                                />
+                                                <Select
+                                                    items="{path: '/zjblessons_base_Regions'}"
+                                                    id="idRegionTextSelect"
+                                                    editable="{= ${objectView>/bEditMode}}"
+                                                >
+                                                    <items>
+                                                        <core:Item
+                                                            key='{RegionID}'
+                                                            text='{RegionText}'
+                                                        />
+                                                    </items>
+                                                </Select>
+                                            </VBox>
+                                        </content>
+                                    </CustomListItem>
+
+                                    <CustomListItem>
+                                        <content>
+                                            <Label
+                                                labelFor="idDescriptionInput"
+                                                text="{i18n>tableDescriptionTitle}"
+                                            />
+                                            <Input
+                                                id="idDescriptionInput"
+                                                value="{Description}"
+                                                editable="{= ${objectView>/bEditMode}}"
+                                            />
+                                        </content>
+                                    </CustomListItem>
+                                </items>
+                            </List>
+                        </VBox>
+                    </IconTabFilter>
                     <IconTabFilter
                         icon="{i18n>allIcon}"
                         text="{i18n>objectForm}"

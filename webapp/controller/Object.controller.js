@@ -100,14 +100,15 @@ sap.ui.define([
 		},
 
 		onSaveButtonPress: function (oEvent) {
+			const oModel = this.getModel(),
+				oView = this.getView(),
+				oPendingChanges = oModel.getPendingChanges(),
+				sPath = this.getView().getBindingContext().getPath().slice(1);
+			if (oPendingChanges.hasOwnProperty(sPath)) {
+				oView.setBusy(true);
+				oModel.submitChanges({ success: () => oView.setBusy(false), error: () => oView.setBusy(false) });
+			}
 			this._setEditMode(false);
-			this.getModel().submitChanges({
-				success: () => {
-					MessageToast.show(this.getResourceBundle().getText('toastCreated'));
-					// this._bindView();
-					this.bind
-				}
-			});
 		},
 		onEditButtonPress: function () {
 			this._setEditMode(true);
