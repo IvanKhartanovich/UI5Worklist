@@ -64,6 +64,7 @@ sap.ui.define([
 
 		_getTableTemplate: function () {
 			const oTemplate = new sap.m.ColumnListItem({
+				highlight: "{= ${Version} === 'A' ? 'Success' : 'Error'}",
 				type: 'Navigation',
 				navigated: true,
 				cells: [
