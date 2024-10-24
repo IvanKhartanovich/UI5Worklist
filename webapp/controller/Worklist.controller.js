@@ -90,11 +90,17 @@ sap.ui.define([
 		},
 
 		_onPressDelete: function (oEvent) {
+
 			const oBindingContext = oEvent.getSource().getBindingContext(),
 				skey = this.getModel().createKey('/zjblessons_base_Headers', {
 					HeaderID: oBindingContext.getProperty('HeaderID')
-				});
-			this.getModel().remove(skey);
+				}), sVersion = oBindingContext.getProperty('Version');
+			if (sVersion === 'D') {
+				this.getModel().remove(skey);
+			}
+			else {
+				MessageToast.show(this.getResourceBundle().getText('deleteNotAllowed'));
+			}
 		},
 
 		onPressRefresh: function () {
@@ -157,6 +163,20 @@ sap.ui.define([
 				}
 			});
 			this._oDialog.close();
+		},
+
+		onIconTabHeaderSelect: function (oEvent) {
+			const oBinding = this.byId("table").getBinding("items");
+			var sKey = oEvent.getParameter("key"),
+				oFilter = '';
+
+			if (sKey === "Deactivated") {
+				oFilter = new Filter('Version', 'EQ', 'D', false);
+			} else if (sKey === "All") {
+				oFilter = '';
+			}
+
+			oBinding.filter(oFilter);
 		}
 	});
 }

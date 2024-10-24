@@ -20,10 +20,29 @@
             >
                 <headerToolbar>
                     <Toolbar height='auto'>
-                        <Title
-                            id="tableHeader"
-                            text="{i18n>worklistTableTitle} ({= ${worklistView>/sCount}})"
-                        />
+                        <VBox>
+                            <Title
+                                id="tableHeader"
+                                text="{i18n>worklistTableTitle} ({= ${worklistView>/sCount}})"
+                            />
+                            <IconTabHeader
+                                mode="Inline"
+                                class="sapUiResponsiveContentPadding"
+                                select="onIconTabHeaderSelect"
+                            >
+                                <items>
+                                    <IconTabFilter
+                                        icon="{i18n>allIcon}"
+                                        text="{i18n>filterAll}"
+                                    />
+                                    <IconTabFilter
+                                        icon="{i18n>deactivatedIcon}"
+                                        text="{i18n>filterDeactivated}"
+                                        key="Deactivated"
+                                    />
+                                </items>
+                            </IconTabHeader>
+                        </VBox>
                         <ToolbarSpacer />
                         <VBox>
                             <SearchField
