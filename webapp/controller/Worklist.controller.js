@@ -5,7 +5,6 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/FilterOperator",
-	"sap/m/Text",
 	"sap/ui/core/Fragment",
 	"sap/m/MessageToast"
 ], function (BaseController,
@@ -14,7 +13,6 @@ sap.ui.define([
 	Filter,
 	Sorter,
 	FilterOperator,
-	Text,
 	Fragment,
 	MessageToast) {
 	"use strict";
@@ -121,20 +119,25 @@ sap.ui.define([
 		},
 
 		_loadCreateDialog: async function () {
-			this._oDialog = await this.loadFragment({
-				name: "zjblessons.Worklist.view.fragment.CreateDialog",
-				controller: this,
-			}).then(oDialog => {
-				return oDialog;
-			});
-			this._oDialog.open();
+			if (!this._oDialog) {
+				this._oDialog = Fragment.load({
+					name: "zjblessons.Worklist.view.fragment.CreateDialog",
+					controller: this,
+					id: 'Dialog',
+				});
+				this._oDialog.then((oDialog) => {
+					this._oDialog = oDialog;
+					this.getView().addDependent(this._oDialog);
+					this._oDialog.open();
+				});
+			} else { this._oDialog.open() }
+
 		},
 
 		onDialogBeforeOpen: function (oEvent) {
 			const oDialog = oEvent.getSource(),
 				oParams = {
 					Version: 'A',
-					Instance: 1000000,
 				},
 				oEntry = this.getModel().createEntry('/zjblessons_base_Headers', { properties: oParams });
 
@@ -155,7 +158,6 @@ sap.ui.define([
 			});
 			this._oDialog.close();
 		}
-
 	});
 }
 );

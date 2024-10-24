@@ -16,7 +16,7 @@
                     />
                     <Input
                         id='idHeaderID'
-                        value="HeaderID"
+                        value="{HeaderID}"
                     />
                 </VBox>
                 <VBox>
@@ -55,6 +55,7 @@
                         labelFor="idDescription"
                     />
                     <TextArea
+                        width="100%"
                         rows="3"
                         maxLength="256"
                         id='idDescription'
@@ -65,6 +66,8 @@
         </content>
         <beginButton>
             <Button
+                ariaHasPopup="Dialog"
+                width="30%"
                 type="Emphasized"
                 text="{i18n>save}"
                 press="onSaveButtonPress"
@@ -72,6 +75,8 @@
         </beginButton>
         <endButton>
             <Button
+                ariaHasPopup="Dialog"
+                width="30%"
                 type="Transparent"
                 text="{i18n>cancel}"
                 press="onCancelButtonPress"
